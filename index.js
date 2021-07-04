@@ -3,9 +3,9 @@ const taskContainer = document.querySelector(".task__container");
 //Global Storage
 let globalStore = [];
 
-const newCard = ({ id, imageUrl, taskTitle, taskType, taskDescription }) =>
+const newCard = ({ id, imageUrl, taskTitle, taskDescription, taskType }) =>
   `<div class="col-md-6 col-lg-4 id=${id}">
-        <div class="card text">
+        <div class="card">
             <div class="card-header d-flex justify-content-end gap-2">
                 <button type="button" class="btn btn-outline-success" id=${id} onclick="editCard.apply(this, arguments)">
                     <i class="fas fa-pencil-alt" id=${id} onclick="editCard.apply(this, arguments)"></i>
@@ -17,14 +17,14 @@ const newCard = ({ id, imageUrl, taskTitle, taskType, taskDescription }) =>
             <img
                 src=${imageUrl}
                 class="card-img-top"
-                alt="image"
+                alt="Your task image"
             />
             <div class="card-body">
                 <h5 class="card-title">${taskTitle}</h5>
                 <p class="card-text">
                 ${taskDescription}
                 </p>
-                <h4><span class="badge bg-primary">${taskType}</span></h4>
+                <span class="badge bg-primary">${taskType}</span>
             </div>
             <div class="card-footer text-muted">
                 <button type="button" id=${id} class="btn btn-outline-primary float-end">
