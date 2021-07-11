@@ -36,8 +36,7 @@ const newCard = ({ id, imageUrl, taskTitle, taskDescription, taskType }) =>
     </div>`;
 
 const viewCard = ({ id, imageUrl, taskTitle, taskDescription, taskType }) => {
-  return(
-    `<div id=${id}>
+  return `<div id=${id}>
        <img
        src=${imageUrl}
        alt="bg image"
@@ -46,8 +45,7 @@ const viewCard = ({ id, imageUrl, taskTitle, taskDescription, taskType }) => {
        <h2 class="my-3">${taskTitle}</h2>
        <p class="lead">${taskDescription}</p>
        <span class="badge bg-primary">${taskType}</span>
-      </div>`
-  );
+      </div>`;
 };
 
 const loadInitialTaskCards = () => {
