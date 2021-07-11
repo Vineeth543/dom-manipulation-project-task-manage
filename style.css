@@ -1,10 +1,31 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; /* Box Model*/
+  box-sizing: border-box; /* Box Model */
 }
 
 body {
   font-family: "poppins" sans-serif;
   background-color: #ebf2ff;
 }
+
+.task__image__view {
+  height: 300px;
+  width: 100%;
+}
+
+.card-img-top {
+  height: 300px;
+}
+
+/* .navbar .container_fluid{
+  position: relative;
+  z-index:1;
+}
+
+#myVideo {
+  position: fixed;
+  min-width: 100%;
+  min-height: 100%;
+  z-index:-100;
+} */

@@ -1,10 +1,11 @@
 const taskContainer = document.querySelector(".task__container");
+const openTaskModal = document.querySelector(".task__modal__body");
 
 //Global Storage
 let globalStore = [];
 
 const newCard = ({ id, imageUrl, taskTitle, taskDescription, taskType }) =>
-  `<div class="col-md-6 col-lg-4 id=${id}">
+  `<div class="col-md-6 col-lg-4" id=${id}>
         <div class="card">
             <div class="card-header d-flex justify-content-end gap-2">
                 <button type="button" class="btn btn-outline-success" id=${id} onclick="editCard.apply(this, arguments)">
@@ -27,12 +28,27 @@ const newCard = ({ id, imageUrl, taskTitle, taskDescription, taskType }) =>
                 <span class="badge bg-primary">${taskType}</span>
             </div>
             <div class="card-footer text-muted">
-                <button type="button" id=${id} class="btn btn-outline-primary float-end">
+                <button type="button" class="btn btn-outline-primary float-end" data-bs-toggle="modal" data-bs-target="#showTask" id=${id} onclick="openTask.apply(this, arguments)">
                 Open Task
                 </button>
             </div>
         </div>
     </div>`;
+
+const viewCard = ({ id, imageUrl, taskTitle, taskDescription, taskType }) => {
+  return(
+    `<div id=${id}>
+       <img
+       src=${imageUrl}
+       alt="bg image"
+       class="img-fluid task__image__view mb-3"
+       />
+       <h2 class="my-3">${taskTitle}</h2>
+       <p class="lead">${taskDescription}</p>
+       <span class="badge bg-primary">${taskType}</span>
+      </div>`
+  );
+};
 
 const loadInitialTaskCards = () => {
   // Access LocalStorage
@@ -96,7 +112,6 @@ const deleteCard = (event) => {
 
 const editCard = (event) => {
   event = window.event;
-  // const targetID = event.target.id;
   const tagname = event.target.tagName;
 
   let parentElement;
@@ -115,7 +130,10 @@ const editCard = (event) => {
   taskTitle.setAttribute("contenteditable", "true");
   taskDescription.setAttribute("contenteditable", "true");
   taskType.setAttribute("contenteditable", "true");
-  submitButton.setAttribute("onclick", "saveEditchanges.apply(this, arguments)");
+  submitButton.setAttribute(
+    "onclick",
+    "saveEditchanges.apply(this, arguments)"
+  );
   submitButton.innerHTML = "Save Changes";
 };
 
@@ -163,4 +181,13 @@ const saveEditchanges = (event) => {
   taskType.setAttribute("contenteditable", "false");
   submitButton.removeAttribute("onclick");
   submitButton.innerHTML = "Open Task";
+};
+
+const openTask = (event) => {
+  if (!event) {
+    event = window.event;
+  }
+
+  const viewTask = globalStore.filter(({ id }) => id === event.target.id);
+  openTaskModal.innerHTML = viewCard(viewTask[0]);
 };
